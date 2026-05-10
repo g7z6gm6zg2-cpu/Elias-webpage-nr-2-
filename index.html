@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elias Egeberg — Filmmaker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #000;
+      --white: #fff;
+      --grey: #888;
+      --grey-dim: #333;
+      --accent: #e8e8e8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 40px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%);
+    }
+
+    .nav-logo {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--grey);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 40px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-img {
+      position: absolute;
+      width: 112%;
+      height: 135%;
+      top: -17%;
+      left: -6%;
+      object-fit: cover;
+      object-position: center 70%;
+      z-index: 0;
+      will-change: transform;
+      display: block;
+      transform: scaleX(-1) scale(0.9);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom,
+          rgba(0,0,0,0.25) 0%,
+          rgba(0,0,0,0.45) 50%,
+          rgba(0,0,0,0.88) 100%);
+      z-index: 0;
+    }
+
+    .hero-grain {
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.04;
+      z-index: 0;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 900px; }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 20px;
+    }
+
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(72px, 13vw, 160px);
+      font-weight: 400;
+      line-height: 0.85;
+      letter-spacing: 0.02em;
+      margin-bottom: 28px;
+    }
+
+    .hero-name-outline {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 2px #fff;
+    }
+
+    .hero-name-solid {
+      display: block;
+      color: #fff;
+      -webkit-text-stroke: 0;
+    }
+
+    .hero-tagline {
+      font-size: clamp(14px, 2vw, 18px);
+      color: var(--grey);
+      letter-spacing: 0.06em;
+      font-weight: 400;
+    }
+
+    .hero-tagline span {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      right: 40px;
+      z-index: 1;
+      writing-mode: vertical-rl;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-scroll::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 48px;
+      background: var(--grey-dim);
+    }
+
+    /* ── SECTION WRAPPER ── */
+    section {
+      padding: 100px 40px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 60px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 1px;
+      background: var(--grey-dim);
+    }
+
+    /* ── WORK ── */
+    .work { border-top: 1px solid var(--grey-dim); }
+
+    .work-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 64px;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .work-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .category-tabs {
+      display: flex;
+      gap: 4px;
+    }
+
+    .tab {
+      background: none;
+      border: 1px solid var(--grey-dim);
+      color: var(--grey);
+      font-family: inherit;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 8px 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab:hover, .tab.active {
+      background: var(--white);
+      border-color: var(--white);
+      color: var(--black);
+    }
+
+    .films-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2px;
+    }
+
+    .grid-divider {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 48px 0 24px;
+    }
+
+    .grid-divider-label {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--grey);
+      white-space: nowrap;
+    }
+
+    .grid-divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--grey-dim);
+    }
+
+    .film-card {
+      position: relative;
+      aspect-ratio: 16/9;
+      background: #0d0d0d;
+      overflow: hidden;
+      cursor: pointer;
+      group: true;
+    }
+
+    .film-card-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%);
+      transition: background 0.3s;
+    }
+
+    .film-card:hover .film-card-inner {
+      background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.1) 100%);
+    }
+
+    .film-card-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .play-icon {
+      width: 48px;
+      height: 48px;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s;
+    }
+
+    .film-card:hover .play-icon {
+      border-color: var(--white);
+      background: rgba(255,255,255,0.08);
+      transform: scale(1.1);
+    }
+
+    .play-icon svg {
+      margin-left: 3px;
+      fill: rgba(255,255,255,0.7);
+      transition: fill 0.25s;
+    }
+
+    .film-card:hover .play-icon svg { fill: var(--white); }
+
+    .film-card:nth-child(1) { background: #0a0a0a; }
+    .film-card:nth-child(2) { background: #080808; }
+    .film-card:nth-child(3) { background: #0c0c0c; }
+    .film-card:nth-child(4) { background: #0a0a0a; }
+    .film-card:nth-child(5) { background: #090909; }
+    .film-card:nth-child(6) { background: #0b0b0b; }
+
+    .film-stripe {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--grey-dim);
+    }
+
+    .film-meta {
+      position: relative;
+      z-index: 1;
+    }
+
+    .film-category {
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 6px;
+    }
+
+    .film-title {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .film-year {
+      font-size: 11px;
+      color: var(--grey);
+      margin-top: 4px;
+    }
+
+    /* ── LATEST PROJECT ── */
+    .latest-project { border-top: 1px solid var(--grey-dim); }
+
+    .latest-project-inner {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .latest-project-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-width: 380px;
+    }
+
+    .latest-project-info {
+      padding-top: 8px;
+    }
+
+    .latest-project-title {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .latest-project-desc {
+      font-size: 14px;
+      color: var(--grey);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── GALLERY ── */
+    .gallery { border-top: 1px solid var(--grey-dim); }
+
+    .gallery-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .gallery-title {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    /* Stage = arrow + frame + arrow in a row */
+    .gallery-stage {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .gallery-arrow {
+      flex-shrink: 0;
+      width: 56px;
+      height: 56px;
+      border: 1px solid var(--grey-dim);
+      background: none;
+      color: var(--grey);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .gallery-arrow:hover:not(:disabled) {
+      border-color: var(--white);
+      color: var(--white);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .gallery-arrow:disabled { opacity: 0.15; cursor: not-allowed; }
+
+    /* Frame: dark surround, images stack in same grid cell */
+    .gallery-frame {
+      flex: 1;
+      background: #080808;
+      border: 1px solid #1a1a1a;
+      display: grid;
+      place-items: center;
+      padding: 48px 40px;
+    }
+
+    /* All images occupy the same grid cell — opacity handles visibility */
+    .gallery-img {
+      grid-area: 1 / 1;
+      max-width: 100%;
+      max-height: 72vh;
+      width: auto;
+      height: auto;
+      display: block;
+      opacity: 0;
+      transition: opacity 0.45s ease;
+      pointer-events: none;
+    }
+
+    .gallery-img.is-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .gallery-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 16px;
+    }
+
+    .gallery-count {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--grey);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ── ABOUT ── */
+    .about { border-top: 1px solid var(--grey-dim); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 44%;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .about-photo-wrap {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .about-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center bottom;
+      display: block;
+    }
+
+    .about-right .stat-row {
+      padding: 16px 0;
+    }
+
+    .about-right .stat-label {
+      font-size: 13px;
+    }
+
+    .about-right .stat-value {
+      font-size: 16px;
+    }
+
+    .about-left { }
+
+    .about-heading {
+      font-size: clamp(32px, 4.5vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 36px;
+    }
+
+    .about-heading em {
+      font-style: normal;
+      color: var(--grey);
+    }
+
+    .about-body {
+      font-size: 17px;
+      color: #aaa;
+      line-height: 1.85;
+    }
+
+    .about-body p + p { margin-top: 20px; }
+
+    .about-right { padding-top: 8px; }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--grey-dim);
+    }
+
+    .stat-row:first-child { border-top: 1px solid var(--grey-dim); }
+
+    .stat-label {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+
+    .stat-value {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── CONTACT ── */
+    .contact { border-top: 1px solid var(--grey-dim); }
+
+    .contact-inner {
+      max-width: 720px;
+    }
+
+    .contact-heading {
+      font-size: clamp(32px, 5vw, 64px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.0;
+      margin-bottom: 48px;
+    }
+
+    .contact-heading span { color: var(--grey); }
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+      margin-bottom: 60px;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 24px;
+      border: 1px solid var(--grey-dim);
+      color: var(--grey);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+
+    .social-link:hover {
+      border-color: var(--white);
+      color: var(--white);
+    }
+
+    .social-link svg {
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+
+    .social-link:hover svg { opacity: 1; }
+
+    .contact-email {
+      font-size: clamp(18px, 2.5vw, 26px);
+      color: var(--grey);
+      text-decoration: none;
+      border-bottom: 1px solid var(--grey-dim);
+      padding-bottom: 4px;
+      transition: color 0.2s, border-color 0.2s;
+      letter-spacing: -0.01em;
+    }
+
+    .contact-email:hover {
+      color: var(--white);
+      border-color: var(--white);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 40px;
+      border-top: 1px solid var(--grey-dim);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-name {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .footer-copy {
+      font-size: 11px;
+      color: var(--grey);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      .nav-links { gap: 20px; }
+
+      .hero { padding: 0 24px 64px; }
+      .hero-scroll { display: none; }
+
+      section { padding: 72px 24px; }
+
+      .work-header { flex-direction: column; align-items: flex-start; }
+
+      .films-grid { grid-template-columns: 1fr; gap: 2px; }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .latest-project-inner { grid-template-columns: 1fr; }
+      .latest-project-image img { max-width: 100%; }
+
+      .gallery-stage { gap: 12px; }
+      .gallery-arrow { width: 44px; height: 44px; }
+      .gallery-frame { padding: 28px 20px; }
+      .gallery-img { max-height: 60vh; }
+
+      footer { padding: 28px 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .nav-links { display: none; }
+      .category-tabs { flex-wrap: wrap; }
+    }
+
+    /* ── FILTER JS HELPERS ── */
+    .film-card[data-hidden="true"] { display: none; }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">EE</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#photos">Photos</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <img class="hero-img" src="kolla-klippet.jpg" alt="Elias Egeberg">
+    <div class="hero-overlay"></div>
+    <div class="hero-grain"></div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Portfolio · 2025</p>
+      <h1 class="hero-name">
+        <span class="hero-name-outline">Elias</span>
+        <span class="hero-name-solid">Egeberg</span>
+      </h1>
+      <p class="hero-tagline">
+        <span>Filmmaker</span> &thinsp;·&thinsp; <span id="age">18</span> &thinsp;·&thinsp;
+        <span>Skate&nbsp;&amp;&nbsp;Short&nbsp;Films</span>
+      </p>
+    </div>
+
+    <div class="hero-scroll">Scroll</div>
+  </div>
+
+  <!-- WORK -->
+  <section class="work" id="work">
+    <div class="section-label">Selected Work</div>
+
+    <div class="work-header">
+      <h2 class="work-title">Films</h2>
+      <div class="category-tabs">
+        <button class="tab active" data-filter="all">All</button>
+        <button class="tab" data-filter="skate">Skate Films</button>
+        <button class="tab" data-filter="vlog">Vlogs & Short Films</button>
+      </div>
+    </div>
+
+    <div class="films-grid">
+
+      <!-- CARD 1 — Skate -->
+      <div class="film-card" data-category="skate">
+        <div class="film-stripe"></div>
+        <iframe
+          src="https://www.youtube.com/embed/IppC2I9E05I"
+          title="Skate Film"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          style="position:absolute;inset:0;width:100%;height:100%;border:0;"
+        ></iframe>
+      </div>
+
+      <!-- CARD 2 — Skate -->
+      <div class="film-card" data-category="skate">
+        <div class="film-stripe"></div>
+        <iframe
+          src="https://www.youtube.com/embed/wVqpU2VgXHE"
+          title="Skate Film"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          style="position:absolute;inset:0;width:100%;height:100%;border:0;"
+        ></iframe>
+      </div>
+
+      <!-- CARD 3 — Skate -->
+      <div class="film-card" data-category="skate">
+        <div class="film-stripe"></div>
+        <iframe
+          src="https://www.youtube.com/embed/TSQ7jY2K4Uk"
+          title="Skate Film"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          style="position:absolute;inset:0;width:100%;height:100%;border:0;"
+        ></iframe>
+      </div>
+
+      <!-- DIVIDER -->
+      <div class="grid-divider">
+        <span class="grid-divider-label">Vlogs &amp; Short Films</span>
+        <span class="grid-divider-line"></span>
+      </div>
+
+      <!-- CARD 4 — Vlog -->
+      <div class="film-card" data-category="vlog">
+        <div class="film-stripe"></div>
+        <iframe
+          src="https://www.youtube.com/embed/m1r443-lmEY"
+          title="Vlog / Short Film"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          style="position:absolute;inset:0;width:100%;height:100%;border:0;"
+        ></iframe>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- LATEST PROJECT -->
+  <section class="latest-project" id="latest">
+    <div class="section-label">Latest Project</div>
+    <div class="latest-project-inner">
+      <div class="latest-project-image">
+        <img src="gallery-poster-paper-planes.jpg" alt="Paper Planes">
+      </div>
+      <div class="latest-project-info">
+        <h2 class="latest-project-title">Paper Planes</h2>
+        <p class="latest-project-desc">Description coming soon</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTOS -->
+  <section class="gallery" id="photos">
+    <div class="section-label">Photos</div>
+
+    <div class="gallery-header">
+      <h2 class="gallery-title">Stills</h2>
+    </div>
+
+    <div class="gallery-stage">
+
+      <button class="gallery-arrow gallery-arrow-prev" aria-label="Previous" disabled>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="13,4 7,10 13,16"/>
+        </svg>
+      </button>
+
+      <div class="gallery-frame">
+        <img class="gallery-img is-active" src="gallery-john-nobel.jpg" alt="John Nobel">
+        <img class="gallery-img" src="gallery-vitus-i-rod.jpg" alt="Vitus i Röd">
+        <img class="gallery-img" src="gallery-image-003.jpg" alt="">
+        <img class="gallery-img" src="gallery-image-013.jpg" alt="">
+      </div>
+
+      <button class="gallery-arrow gallery-arrow-next" aria-label="Next">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="7,4 13,10 7,16"/>
+        </svg>
+      </button>
+
+    </div>
+
+    <div class="gallery-footer">
+      <span class="gallery-count">01 / 04</span>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="section-label">About</div>
+
+    <div class="about-grid">
+      <div class="about-left">
+        <h2 class="about-heading">
+          Making films<br>
+          <em>since before</em><br>
+          I could drive.
+        </h2>
+        <div class="about-body">
+          <p>
+            I'm Elias — an 18-year-old filmmaker from Bergen, Norway. I started shooting
+            skate videos because it was the only way to spend every day at the park
+            and call it productive.
+          </p>
+          <p>
+            From handheld skate edits to narrative short films, I chase the kind of
+            footage that feels real. Raw movement, honest light, and moments that
+            happen once.
+          </p>
+          <p>
+            Heading to Milan to study film — taking the camera with me.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-right">
+        <div class="about-photo-wrap">
+          <img class="about-photo" src="gallery-bikeski.jpg" alt="Elias Egeberg">
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Based</span>
+          <span class="stat-value">Bergen, Norway</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Focus</span>
+          <span class="stat-value">Skate &amp; Narrative</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Next move</span>
+          <span class="stat-value">Film School, Milan</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Tools</span>
+          <span class="stat-value">Camera · Edit · Story</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="section-label">Contact</div>
+
+    <div class="contact-inner">
+      <h2 class="contact-heading">
+        Let's make<br>
+        <span>something.</span>
+      </h2>
+
+      <div class="social-links">
+
+        <a class="social-link" href="https://www.youtube.com/@Elias.Egeberg" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+            <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/>
+          </svg>
+          YouTube
+        </a>
+
+        <a class="social-link" href="https://www.instagram.com/eliasegeberg" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+          Instagram
+        </a>
+
+        <a class="social-link" href="tel:+4791245901">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          Get in touch
+        </a>
+
+      </div>
+
+      <a class="contact-email" href="mailto:elias1egeberg@gmail.com">
+        elias1egeberg@gmail.com
+      </a>
+
+      <a class="contact-email" href="tel:+4791245901" style="display:block;margin-top:16px;">
+        +47 912 45 901
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-name">Elias Egeberg</span>
+    <span class="footer-copy">© 2025 · All rights reserved</span>
+  </footer>
+
+  <script>
+    // Category filter
+    const tabs = document.querySelectorAll('.tab');
+    const cards = document.querySelectorAll('.film-card');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const filter = tab.dataset.filter;
+        cards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.removeAttribute('data-hidden');
+          } else {
+            card.setAttribute('data-hidden', 'true');
+          }
+        });
+      });
+    });
+
+    // Dynamic age — birthday November 7, 2007
+    (function () {
+      const birthday = new Date(2007, 10, 7); // month is 0-indexed
+      const today = new Date();
+      let age = today.getFullYear() - birthday.getFullYear();
+      const hasHadBirthdayThisYear =
+        today.getMonth() > birthday.getMonth() ||
+        (today.getMonth() === birthday.getMonth() && today.getDate() >= birthday.getDate());
+      if (!hasHadBirthdayThisYear) age--;
+      document.getElementById('age').textContent = age;
+    })();
+
+    // Hero — animate on load
+    (function () {
+      const heroEls = ['.hero-eyebrow', '.hero-name', '.hero-tagline', '.hero-scroll'];
+      heroEls.forEach((sel, i) => {
+        const el = document.querySelector(sel);
+        if (!el) return;
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(18px)';
+        el.style.transition = 'opacity 0.9s cubic-bezier(0.22,1,0.36,1), transform 0.9s cubic-bezier(0.22,1,0.36,1)';
+        el.style.transitionDelay = (i * 140 + 120) + 'ms';
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }));
+      });
+    })();
+
+    // Scroll reveal — Intersection Observer
+    (function () {
+      const selectors = [
+        '.nav-logo', '.nav-links li',
+        '.section-label',
+        '.work-title', '.tab',
+        '.film-card', '.grid-divider',
+        '.gallery-header', '.gallery-title', '.gallery-stage', '.gallery-footer',
+        '.about-heading', '.about-body p', '.stat-row',
+        '.contact-heading', '.social-link', '.contact-email',
+        '.footer-name', '.footer-copy',
+      ];
+
+      selectors.forEach(sel => {
+        document.querySelectorAll(sel).forEach(el => el.classList.add('reveal'));
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        const buckets = new Map();
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const anchor = entry.target.closest('section, footer, nav') || document.body;
+          if (!buckets.has(anchor)) buckets.set(anchor, []);
+          buckets.get(anchor).push(entry.target);
+        });
+
+        buckets.forEach(els => {
+          els.sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+          els.forEach((el, i) => {
+            el.style.transitionDelay = (i * 90) + 'ms';
+            el.classList.add('is-visible');
+            observer.unobserve(el);
+          });
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    })();
+
+    // Gallery — one image at a time, fade transition
+    (function () {
+      const imgs    = document.querySelectorAll('.gallery-img');
+      const prevBtn = document.querySelector('.gallery-arrow-prev');
+      const nextBtn = document.querySelector('.gallery-arrow-next');
+      const countEl = document.querySelector('.gallery-count');
+      const total   = imgs.length;
+      let current   = 0;
+
+      function pad(n) { return String(n).padStart(2, '0'); }
+
+      function update() {
+        imgs.forEach((img, i) => img.classList.toggle('is-active', i === current));
+        countEl.textContent = `${pad(current + 1)} / ${pad(total)}`;
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current === total - 1;
+      }
+
+      prevBtn.addEventListener('click', () => { if (current > 0) { current--; update(); } });
+      nextBtn.addEventListener('click', () => { if (current < total - 1) { current++; update(); } });
+      update();
+    })();
+
+    // Nav transparency + hero parallax on scroll
+    const nav = document.querySelector('nav');
+    const heroImg = document.querySelector('.hero-img');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+
+      nav.style.background = y > 60
+        ? 'rgba(0,0,0,0.95)'
+        : 'linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 100%)';
+
+      if (heroImg) heroImg.style.transform = `scaleX(-1) scale(0.9) translateY(${y * 0.35}px)`;
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
